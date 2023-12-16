@@ -1,0 +1,88 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #f9faff;
+}
+
+:root {
+    --wrapper-max: 1440px;
+    --wrapper-min: 280px;
+
+    --container-max: 1200px;
+    --container-padding: 15px;
+}
+
+/* Визуальное скрытие элементов  */
+.vhidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+/* Изображения */
+img {
+    max-width: 100%;
+}
+
+picture {
+    display: inline-block;
+}
+
+ul {
+    margin: 0;
+    height: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    border: 0;
+    color: inherit;
+    font-family: inherit;
+    font-style: normal;
+}
+
+button {
+    text-decoration: none;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Ограничение для макета */
+.wrapper {
+    min-height: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Контентная область */
+.container {
+    max-width: var(--container-max);
+    margin: 0;
+    padding: 0 var(--container-padding);
+}
+
+.btn {
+    background-color: lightsalmon;
+    border-radius: 9px;
+    padding: 10px 20px;
+    margin: 15px;
+}
