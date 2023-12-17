@@ -1,8 +1,8 @@
 const myLibrary = [
-    { title: "1984", author: "Mikhail Bulgakov", pages: 300, read: true },
+    { title: "1984", author: "George Orwell", pages: 265, read: true },
     {
         title: "The Master and Margarita",
-        author: "George Orwell",
+        author: "Mikhail Bulgakov",
         pages: 412,
         read: true,
     },
@@ -24,7 +24,6 @@ const inputTitle = document.querySelector(".input-title");
 const inputAuthor = document.querySelector(".input-author");
 const inputPages = document.querySelector(".input-pages");
 const form = document.querySelector(".form");
-const books = document.querySelector(".book");
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -34,21 +33,68 @@ form.addEventListener("submit", (event) => {
     let pages = inputPages.value;
 
     addBookToLibrary(title, author, pages);
-    console.log(myLibrary);
+    showBookTable();
 });
 
 button.addEventListener("click", () => {
-    console.log(myLibrary);
-    showBook();
+    showBookTable();
 });
 
 function addBookToLibrary(title, author, pages) {
     myLibrary.push(new Book(title, author, pages, "not read"));
 }
 
-function showBook() {
+function showBookTable() {
+    const books = document.querySelector(".books");
+    let tableTamplate = `<table class="books__table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+
+        </tbody>
+    </table>`;
+    books.innerHTML = tableTamplate;
+
+    const tbody = document.querySelector(".tbody");
+    let row = ``;
+
     myLibrary.forEach((book) => {
-        console.log(book.title);
+        let title = book.title;
+        let author = book.author;
+        let pages = book.pages;
+
+        row =
+            row +
+            `
+        <tr class="tr">
+            <td>${title}</td>
+            <td>${author}</td>
+            <td>${pages}</td>
+        </tr>`;
     });
+    tbody.innerHTML = row;
 }
-showBook();
+
+// MODAL
+const open = document.querySelector(".open-modal");
+const close = document.querySelector(".close-modal");
+const modal = document.querySelector(".modal");
+
+open.addEventListener("click", () => {
+    modal.showModal();
+});
+
+close.addEventListener("click", () => {
+    modal.close();
+});
+
+modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.close();
+    }
+});

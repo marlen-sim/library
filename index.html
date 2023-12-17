@@ -13,33 +13,44 @@
     <body>
         <div class="wrapper">
             <div class="container">
-                <form action="" class="form">
-                    <p>
-                        <label for="book__input-title">Title</label>
-                        <input
-                            class="input-title"
-                            type="text"
-                            id="book__input-title"
-                        />
-                    </p>
-                    <p>
-                        <label for="book__input-author">Author</label>
-                        <input
-                            class="input-author"
-                            type="text"
-                            id="book__input-author"
-                        />
-                    </p>
-                    <p>
-                        <label for="book__input-pages">Pages</label>
-                        <input
-                            class="input-pages"
-                            type="text"
-                            id="book__input-pages"
-                        />
-                    </p>
-                    <button type="submit" class="btn">NEW BOOK</button>
-                </form>
+                <dialog class="modal">
+                    <div class="modal-inner">
+                        <form action="" class="form" method="dialog">
+                            <p>
+                                <label for="book__input-title">Title</label>
+                                <input
+                                    class="input-title"
+                                    type="text"
+                                    id="book__input-title"
+                                />
+                            </p>
+                            <p>
+                                <label for="book__input-author">Author</label>
+                                <input
+                                    class="input-author"
+                                    type="text"
+                                    id="book__input-author"
+                                />
+                            </p>
+                            <p>
+                                <label for="book__input-pages">Pages</label>
+                                <input
+                                    class="input-pages"
+                                    type="text"
+                                    id="book__input-pages"
+                                />
+                            </p>
+                            <button
+                                type="submit"
+                                formmethod="dialog"
+                                class="btn close-modal"
+                            >
+                                ADD
+                            </button>
+                        </form>
+                    </div>
+                </dialog>
+                <button class="open-modal">NEW BOOK</button>
                 <div class="books"></div>
             </div>
         </div>
