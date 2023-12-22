@@ -1,10 +1,21 @@
 const myLibrary = [
-    { title: "1984", author: "George Orwell", pages: 265, read: "read" },
+    {
+        title: "1984",
+        author: "George Orwell",
+        pages: 265,
+        read: "read",
+        toggleReadStatus: function () {
+            this.read = this.read === "unread" ? "read" : "unread";
+        },
+    },
     {
         title: "The Master and Margarita",
         author: "Mikhail Bulgakov",
         pages: 412,
         read: "unread",
+        toggleReadStatus: function () {
+            this.read = this.read === "unread" ? "read" : "unread";
+        },
     },
 ];
 
@@ -115,10 +126,9 @@ function showBookTable() {
             const index = btn.dataset.edit;
             const book = myLibrary[index];
             console.log(book);
-            // Toggle the read status for the specific book using the prototype method
+
             book.toggleReadStatus();
 
-            // After toggling, update the table
             showBookTable();
         });
     });
