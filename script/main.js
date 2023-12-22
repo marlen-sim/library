@@ -44,7 +44,7 @@ function addBookToLibrary(title, author, pages) {
     myLibrary.push(new Book(title, author, pages, "not read"));
 }
 
-function showBookTable() {
+function renderTable() {
     const books = document.querySelector(".books");
     let tableTamplate = `<table class="books__table">
         <thead>
@@ -52,6 +52,9 @@ function showBookTable() {
                 <th>Title</th>
                 <th>Author</th>
                 <th>Pages</th>
+                <th>Read</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody class="tbody">
@@ -59,26 +62,52 @@ function showBookTable() {
         </tbody>
     </table>`;
     books.innerHTML = tableTamplate;
+}
 
+renderTable();
+
+function showBookTable() {
     const tbody = document.querySelector(".tbody");
-    let row = ``;
 
-    myLibrary.forEach((book) => {
+    let rowHTML = "";
+
+    myLibrary.forEach((book, index) => {
         let title = book.title;
         let author = book.author;
         let pages = book.pages;
 
-        row =
-            row +
-            `
-        <tr class="tr">
+        rowHTML += `
+        <tr class="tr" data-index="${index}">
             <td>${title}</td>
             <td>${author}</td>
             <td>${pages}</td>
+            <td>read</td>
+            <td>
+                <button>Edit</button>
+            </td>
+            <td>
+                <button class="delete-btn js-delete-btn" data-delete="${index}">Delete</button>
+            </td>
         </tr>`;
     });
-    tbody.innerHTML = row;
+
+    tbody.innerHTML = rowHTML;
+
+    document.querySelectorAll(".js-delete-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const index = btn.dataset.delete;
+            console.log(index);
+            deleteItem(index);
+            showBookTable();
+        });
+    });
+
+    function deleteItem(index) {
+        myLibrary.splice(index, 1);
+    }
 }
+
+showBookTable();
 
 // MODAL
 const open = document.querySelector(".open-modal");
