@@ -134,6 +134,14 @@ th {
     background-color: red;
     color: #fff;
     border-radius: 4px;
-    padding: 0.2em;
+    padding: 0.3em;
+    cursor: pointer;
+}
+
+.toggle-btn {
+    background-color: rgb(66, 187, 238);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.3em;
     cursor: pointer;
 }

@@ -1,20 +1,23 @@
 const myLibrary = [
-    { title: "1984", author: "George Orwell", pages: 265, read: true },
+    { title: "1984", author: "George Orwell", pages: 265, read: "read" },
     {
         title: "The Master and Margarita",
         author: "Mikhail Bulgakov",
         pages: 412,
-        read: true,
+        read: "unread",
     },
 ];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, toggleReadStatus) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
     this.info = function () {
         return `${title} by ${author}, ${pages} pages, ${read}`;
+    };
+    this.toggleReadStatus = function () {
+        this.read = this.read === "unread" ? "read" : "unread";
     };
 }
 
@@ -40,8 +43,8 @@ button.addEventListener("click", () => {
     showBookTable();
 });
 
-function addBookToLibrary(title, author, pages) {
-    myLibrary.push(new Book(title, author, pages, "not read"));
+function addBookToLibrary(title, author, pages, read = "unread") {
+    myLibrary.push(new Book(title, author, pages, read));
 }
 
 function renderTable() {
@@ -52,7 +55,7 @@ function renderTable() {
                 <th>Title</th>
                 <th>Author</th>
                 <th>Pages</th>
-                <th>Read</th>
+                <th>Read status</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -75,15 +78,16 @@ function showBookTable() {
         let title = book.title;
         let author = book.author;
         let pages = book.pages;
+        let read = book.read;
 
         rowHTML += `
         <tr class="tr" data-index="${index}">
             <td>${title}</td>
             <td>${author}</td>
             <td>${pages}</td>
-            <td>read</td>
+            <td class="js-read">${read}</td>
             <td>
-                <button>Edit</button>
+                <button class="toggle-btn js-toggle-btn" data-edit="${index}">Edit</button>
             </td>
             <td>
                 <button class="delete-btn js-delete-btn" data-delete="${index}">Delete</button>
@@ -105,6 +109,19 @@ function showBookTable() {
     function deleteItem(index) {
         myLibrary.splice(index, 1);
     }
+
+    document.querySelectorAll(".js-toggle-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const index = btn.dataset.edit;
+            const book = myLibrary[index];
+            console.log(book);
+            // Toggle the read status for the specific book using the prototype method
+            book.toggleReadStatus();
+
+            // After toggling, update the table
+            showBookTable();
+        });
+    });
 }
 
 showBookTable();
